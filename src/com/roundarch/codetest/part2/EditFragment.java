@@ -98,6 +98,7 @@ public class EditFragment extends Fragment {
     // Modifies the data model to swap the values in text1 and text2
     private void swapText(DataModel model) {
         // TODO - swap the text1 and text2 fields on the data model
+
         model.setText1(edit2.getText().toString());
         model.setText2(edit1.getText().toString());
     }
