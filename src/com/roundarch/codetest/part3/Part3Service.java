@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.roundarch.codetest.part3.model.Location;
@@ -81,7 +82,7 @@ public class Part3Service extends Service {
     //code added from square
     private String sendGetRequest(String url) {
         String s = "";
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient okHttpClient = new OkHttpClient();
         Request request;
         Response response;
 
@@ -91,7 +92,7 @@ public class Part3Service extends Service {
                     .header("Accept", "application/json")
                     .get()
                     .build();
-            response = client.newCall(request).execute();
+            response = okHttpClient.newCall(request).execute();
             s = response.body().string();
         } catch (IOException e) {
         } catch (Exception e) {
@@ -101,13 +102,15 @@ public class Part3Service extends Service {
 
     //code added from parseJson online
     public <T> T parseJSON(String json, Class<T> type) {
-        T r = null;
+        T t = null;
         try {
-            r = new Gson().fromJson(json, type);
-        } catch (Exception e) {
-            Log.i(getClass().getName(), "error while parsing :: " + e);
+            t = new Gson().fromJson(json, type);
         }
-        return r;
+        catch (Exception e)
+        {
+           // Toast.makeText(getClass().getName(), "", e.getMessage().toString(), Toast.LENGTH_LONG).show();
+        }
+        return t;
     }
 
     private void broadcastDataUpdated(ArrayList<Location> result) {
@@ -116,6 +119,7 @@ public class Part3Service extends Service {
 
         intent.setAction(ACTION_SERVICE_DATA_UPDATED);
         intent.putParcelableArrayListExtra("res", result);
+        
         sendBroadcast(intent);
     }
 
