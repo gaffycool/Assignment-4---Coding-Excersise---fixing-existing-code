@@ -10,7 +10,7 @@ import android.support.v4.view.ViewPager;
 import com.roundarch.codetest.part1.Part1Fragment;
 import com.roundarch.codetest.part2.Part2Fragment;
 import com.roundarch.codetest.part3.Part3Fragment;
-import com.roundarch.codetest.part3.Part3Service;
+import com.roundarch.codetest.part3.data.network.Part3Service;
 
 
 public class MainActivity extends FragmentActivity {

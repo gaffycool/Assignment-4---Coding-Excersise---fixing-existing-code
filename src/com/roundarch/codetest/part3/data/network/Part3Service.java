@@ -1,16 +1,15 @@
-package com.roundarch.codetest.part3;
+package com.roundarch.codetest.part3.data.network;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.IBinder;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.roundarch.codetest.part3.model.Location;
-import com.roundarch.codetest.part3.model.Model;
+import com.roundarch.codetest.part3.data.model.IConnectionInterface;
+import com.roundarch.codetest.part3.data.model.Location;
+import com.roundarch.codetest.part3.data.model.Model;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;

@@ -1,6 +1,5 @@
 package com.roundarch.codetest.part3.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.roundarch.codetest.R;
-import com.roundarch.codetest.part3.model.Location;
+import com.roundarch.codetest.part3.data.model.Location;
 
 import java.util.ArrayList;
 

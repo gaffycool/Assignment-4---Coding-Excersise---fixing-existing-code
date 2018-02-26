@@ -1,4 +1,4 @@
-package com.roundarch.codetest.part3.model;
+package com.roundarch.codetest.part3.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

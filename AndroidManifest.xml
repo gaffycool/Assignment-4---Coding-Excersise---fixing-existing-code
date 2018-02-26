@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".part2.EditActivity"></activity>
-        <service android:name=".part3.Part3Service"></service>
+        <service android:name=".part3.data.network.Part3Service"></service>
     </application>
 
 </manifest>

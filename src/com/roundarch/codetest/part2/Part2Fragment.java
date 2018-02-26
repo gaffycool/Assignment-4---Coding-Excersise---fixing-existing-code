@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.roundarch.codetest.R;
 
 public class Part2Fragment extends Fragment {
@@ -84,6 +86,9 @@ public class Part2Fragment extends Fragment {
                     });
 
                 }
+
+            case 2:
+               // Toast.makeText(getActivity(), "failed", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
