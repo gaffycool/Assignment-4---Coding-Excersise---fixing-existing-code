@@ -2,15 +2,29 @@ package com.roundarch.codetest.part3;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.IBinder;
+import android.util.Log;
 
+import com.google.gson.Gson;
+import com.roundarch.codetest.part3.model.Location;
+import com.roundarch.codetest.part3.model.Model;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class Part3Service extends Service {
 
     private final String TAG = this.getClass().getSimpleName();
+    private static String URL = "http://gomashup.com/json.php?fds=geo/usa/zipcode/state/IL";
+
+
 
     // TODO - we can use this as the broadcast intent to filter for in our Part3Fragment
     public static final String ACTION_SERVICE_DATA_UPDATED = "com.roundarch.codetest.ACTION_SERVICE_DATA_UPDATED";
@@ -29,16 +43,89 @@ public class Part3Service extends Service {
         return new Part3ServiceBinder();
     }
 
-    private void updateData() {
+    public void updateData() {
         // TODO - start the update process for our data
+        new AsyncTask<String, Void, ArrayList<Location>>() {
+
+            public void onPostExecute(ArrayList<Location> result)
+            {
+                broadcastDataUpdated(result);
+            }
+
+            @Override
+            protected ArrayList<Location> doInBackground(String... params) {
+                 String response;
+                 Model model;
+                 ArrayList<Location> locations = null;
+                try
+                {
+                    response = sendGetRequest(URL);
+                    response = response.replace("(", "").replace(")", "");
+                    model = parseJSON(response, Model.class);
+                    if(model != null) {
+                        locations = model.getMyLocations();
+                    }
+                } catch (Exception e)
+                {
+
+                }
+
+                return locations;
+            }
+
+
+
+        }.execute();
     }
 
-    private void broadcastDataUpdated() {
+    //code added from square
+    private String sendGetRequest(String url) {
+        String s = "";
+        OkHttpClient client = new OkHttpClient();
+        Request request;
+        Response response;
+
+        try {
+            request = new Request.Builder()
+                    .url(url)
+                    .header("Accept", "application/json")
+                    .get()
+                    .build();
+            response = client.newCall(request).execute();
+            s = response.body().string();
+        } catch (IOException e) {
+        } catch (Exception e) {
+        }
+        return s;
+    }
+
+    //code added from parseJson online
+    public <T> T parseJSON(String json, Class<T> type) {
+        T r = null;
+        try {
+            r = new Gson().fromJson(json, type);
+        } catch (Exception e) {
+            Log.i(getClass().getName(), "error while parsing :: " + e);
+        }
+        return r;
+    }
+
+    private void broadcastDataUpdated(ArrayList<Location> result) {
         // TODO - send the broadcast
+        Intent intent = new Intent();
+
+        intent.setAction(ACTION_SERVICE_DATA_UPDATED);
+        intent.putParcelableArrayListExtra("res", result);
+        sendBroadcast(intent);
     }
 
     public final class Part3ServiceBinder extends Binder {
         // TODO - we need to expose our public IBinder API to clients
+
+        public Part3Service getConnection()
+        {
+            return Part3Service.this;
+        }
     }
 
     // TODO - eventually we plan to request JSON from the network, so we need

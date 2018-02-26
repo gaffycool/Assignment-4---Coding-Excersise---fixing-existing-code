@@ -12,8 +12,8 @@ public class Model {
         return result;
     }
 
-    public void setMyLocations(ArrayList<Location> myLocations) {
-        this.result = myLocations;
+    public void setMyLocations(ArrayList<Location> locations) {
+        this.result = locations;
     }
 
     ArrayList<Location> result;

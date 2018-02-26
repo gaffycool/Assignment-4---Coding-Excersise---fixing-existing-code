@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by TAE on 25-Feb-18.
  */
 
-class Location implements Parcelable {
+public class Location implements Parcelable {
     private String Longitude;
     private String Zipcode;
     private String ZipClass;
