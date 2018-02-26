@@ -119,9 +119,13 @@ public class Part3Fragment extends Fragment {
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (intent.getAction().equals(Part3Service.ACTION_SERVICE_DATA_UPDATED)) {
+
+
                     ArrayList<Location> location = intent.getParcelableArrayListExtra("res");
                     if (location != null) {
-                        if (location == null || location.size() == 0) return;
+                        if (location == null || location.size() == 0)
+                           // Toast.makeText(, "", Toast.LENGTH_SHORT).show();
+                            return;
 
                         listViewAdapter.clear();
 
