@@ -47,6 +47,8 @@ public class Part3Fragment extends Fragment {
         receiver = new Receiver();
         intentFilter = new IntentFilter();
 
+
+        //intent filter added from the part3service class
         intentFilter.addAction(Part3Service.ACTION_SERVICE_DATA_UPDATED); //to pass action to intentfilter
 
         return view;

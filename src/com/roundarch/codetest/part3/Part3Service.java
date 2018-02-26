@@ -82,10 +82,14 @@ public class Part3Service extends Service {
     //code added from square
     private String sendGetRequest(String url) {
         String s = "";
+
+        //creating new connection request
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request;
         Response response;
 
+
+        //just incase request fails, accept json and return string
         try {
             request = new Request.Builder()
                     .url(url)
@@ -117,9 +121,11 @@ public class Part3Service extends Service {
         // TODO - send the broadcast
         Intent intent = new Intent();
 
+        //action from part3 service, passing result by serializable and passing to broadcast
         intent.setAction(ACTION_SERVICE_DATA_UPDATED);
         intent.putParcelableArrayListExtra("res", result);
-        
+
+        //sending intent to broadcast receiver
         sendBroadcast(intent);
     }
 
