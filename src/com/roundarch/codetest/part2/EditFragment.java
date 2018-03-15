@@ -47,7 +47,7 @@ public class EditFragment extends Fragment {
         return view;
     }
 
-    @SuppressLint("StaticFieldLeak")
+    //@SuppressLint("StaticFieldLeak")
     private void modifyModelOperation(final DataModel model) {
         showLoadingDialog();
         refreshModelFromViews();
